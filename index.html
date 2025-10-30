@@ -153,6 +153,33 @@ body.dark-mode .chip:hover {
     background-color: #0d1b2a;
     color: white;
 }
+/* ========= Nacionalidades: 2 columnas ========= */
+.nacionalidades-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columnas */
+  column-gap: 3rem;
+  row-gap: 0.25rem;
+  align-items: start;
+  margin-top: .5rem;
+}
+
+.nacionalidades-grid ul{
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.nacionalidades-grid li{
+  margin-bottom: .35rem;
+  font-weight: 500;
+}
+
+/* Mobile: una sola columna */
+@media (max-width: 700px){
+  .nacionalidades-grid{ grid-template-columns: 1fr; }
+}
+
+/* cierra el CSS general */
 </style>
 
   <script>
@@ -323,6 +350,7 @@ onmouseout="this.style.transform='scale(1)'" />
       <li><strong>Administrative Assistant</strong> – Coordination of billing with clients and merchants. Collections management and interaction with multiple areas. Organization of administrative tasks.</li>
       <li><strong>Administrative Intern</strong> – Support in internal projects and accounting tasks. Billing clients and generating reports. Loading and control of financial information.</li>
     </ul>
+    
     <h2>Nationalities</h2>
 <div class="nacionalidades-grid">
   <ul>
