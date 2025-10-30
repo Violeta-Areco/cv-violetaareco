@@ -5,78 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CV - Violeta Areco</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #fafafa;
-      color: #333;
-      line-height: 1.6;
-    }
-    header {
-      text-align: center;
-      background-color: #f3efff;
-      padding: 3rem 1rem;
-      border-bottom: 2px solid #d9c7ff;
-    }
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.3rem;
-      color: #4a2673;
-    }
-    h2 {
-      color: #4a2673;
-      border-bottom: 2px solid #d9c7ff;
-      padding-bottom: 0.3rem;
-      margin-top: 2rem;
-    }
-    p, li {
-      font-size: 0.97rem;
-    }
-    .subtitle {
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: #555;
-    }
-    .contact {
-      font-size: 0.95rem;
-      margin-top: 0.5rem;
-    }
-    .section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 1.5rem;
-    }
-    ul {
-      margin: 0.5rem 0 0 1rem;
-    }
-    li {
-      margin-bottom: 0.4rem;
-    }
-    .skills-list, .tools-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .tag {
-      background-color: #e9e2ff;
-      color: #4a2673;
-      padding: 0.4rem 0.8rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
-    }
-    footer {
-      text-align: center;
-      font-size: 0.85rem;
-      color: #777;
-      padding: 2rem 1rem;
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 1.7rem; }
-      .section { padding: 1rem; }
-    }
-  </style>
+  <script>
+  // ===== Theme =====
+  const applyTheme = t => {
+    document.documentElement.classList.toggle('dark', t==='dark');
+    localStorage.setItem('theme', t);
+    const btn = document.getElementById('themeToggle');
+    if (btn) btn.textContent = t==='dark' ? '☀️' : '🌙';
+  };
+  // ===== Language =====
+  function setLang(lang){
+    const es = document.getElementById('lang-es');
+    const en = document.getElementById('lang-en');
+    const bes = document.getElementById('btn-es');
+    const ben = document.getElementById('btn-en');
+    es.style.display = (lang==='es') ? '' : 'none';
+    en.style.display = (lang==='en') ? '' : 'none';
+    bes.classList.toggle('active', lang==='es');
+    ben.classList.toggle('active', lang==='en');
+    localStorage.setItem('lang', lang);
+    document.documentElement.lang = lang;
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+    // tema
+    const saved = localStorage.getItem('theme');
+    if (saved) applyTheme(saved);
+    else applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.getElementById('themeToggle')?.addEventListener('click', () => {
+      const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+      applyTheme(next);
+    });
+    // idioma
+    setLang(localStorage.getItem('lang') || 'es');
+    document.getElementById('btn-es')?.addEventListener('click', ()=>setLang('es'));
+    document.getElementById('btn-en')?.addEventListener('click', ()=>setLang('en'));
+  });
+</script>
 </head>
 <body>
   <header>
@@ -92,9 +56,19 @@ onmouseout="this.style.transform='scale(1)'" />
   Madrid, España · <a href="mailto:violeareco@gmail.com">violeareco@gmail.com</a> · +34 618 040 328 ·
   <a href="https://www.linkedin.com/in/violetaareco/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
 </p>
+    <div class="container toprow">
+        <div class="actions">
+          <button id="btn-es" class="chip active" type="button">ES</button>
+          <button id="btn-en" class="chip" type="button">EN</button>
+          <button id="themeToggle" class="theme" type="button" aria-label="Cambiar tema">🌙</button>
+        </div>
+      </div>
+    
   </header>
 
-  <section class="section">
+  <main class="container">
+  <div id="lang-es">
+
     <h2>Perfil profesional</h2>
     <p>
       Profesional con perfil híbrido en administración, analítica de datos y marketing, con experiencia en gestión de procesos y mejora de eficiencia. Combino una mirada estratégica del negocio con habilidades técnicas en herramientas de análisis y visualización de datos. Me motiva trabajar en entornos dinámicos e internacionales, aportando soluciones basadas en datos y una fuerte orientación a resultados.
@@ -151,5 +125,63 @@ onmouseout="this.style.transform='scale(1)'" />
   <footer>
     © 2025 Violeta Areco | CV Online
   </footer>
-</body>
+  </div> <!-- fin idioma español -->
+
+  <div id="lang-en" style="display:none">
+    <h2>Professional Profile</h2>
+    <p>
+      Professional with a hybrid background in administration, data analytics, and marketing, experienced in process management and efficiency improvement. I combine a strategic business perspective with technical skills in data analysis and visualization tools. Motivated to work in dynamic and international environments, bringing data-driven solutions and a strong results orientation.
+    </p>
+
+    <h2>Academic Background</h2>
+    <ul>
+      <li><strong>Master’s in Business Analytics & Data Strategy</strong> – EAE Business School, Madrid, Spain (ongoing)<br>
+      Specialization in Marketing Automation and Marketing Intelligence</li>
+      <li><strong>Bachelor’s Degree in Business Administration and Management</strong> – University of Montevideo, Uruguay<br>
+      Specialization in Marketing and Entrepreneurship & Innovation</li>
+      <li><strong>International Baccalaureate (IB)</strong> – St. Clare’s College, Punta del Este, Uruguay<br>
+      Academic exchange: St. Clare’s, Oxford, United Kingdom</li>
+    </ul>
+
+    <h2>Professional Experience</h2>
+    <p><strong>dLocal – Global Fintech | Montevideo, Uruguay | almost 3 years</strong></p>
+    <ul>
+      <li><strong>Senior Administration Analyst</strong> – Coordination of the accounts receivable team. Responsible for executive-level objectives. Organization and automation of internal workflows.</li>
+      <li><strong>Junior Administration Analyst</strong> – Process management in SAP and SOX controls. Creation, training, and leadership of the collections team. Definition of processes and monitoring metrics (KPIs).</li>
+      <li><strong>Administrative Assistant</strong> – Coordination of billing with clients and merchants. Collections management and interaction with multiple areas. Organization of administrative tasks.</li>
+      <li><strong>Administrative Intern</strong> – Support in internal projects and accounting tasks. Billing clients and generating reports. Loading and control of financial information.</li>
+    </ul>
+  </div> <!-- fin idioma inglés -->
+</main>
+<script>
+  // --- Cambiar idioma ---
+  const btnEs = document.getElementById('btn-es');
+  const btnEn = document.getElementById('btn-en');
+  const langEs = document.getElementById('lang-es');
+  const langEn = document.getElementById('lang-en');
+
+  btnEs.addEventListener('click', () => {
+    langEs.style.display = 'block';
+    langEn.style.display = 'none';
+    btnEs.classList.add('active');
+    btnEn.classList.remove('active');
+  });
+
+  btnEn.addEventListener('click', () => {
+    langEs.style.display = 'none';
+    langEn.style.display = 'block';
+    btnEn.classList.add('active');
+    btnEs.classList.remove('active');
+  });
+
+  // --- Modo oscuro ---
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const darkMode = document.body.classList.contains('dark-mode');
+    themeToggle.textContent = darkMode ? '☀️' : '🌙';
+  });
+</script>
+
+  </body>
 </html>
